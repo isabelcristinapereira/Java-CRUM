@@ -7,15 +7,27 @@ import com.example.colaborador.Repository.ColaboradorRepository;
 import com.example.colaborador.model.ColaboradorModel;
 
 public class Service {
-	 //salvando um cliente no banco de dados
+	 
 	public Optional<Object> salvarColaborador(ColaboradorModel novoColaborador) {
-		Optional<ColaboradorModel> colaborador = ColaboradorRepository.findByNome(novoColaborador.getC());
-		if (cliente.isPresent()) {
+		Optional<ColaboradorModel> colaborador = ColaboradorRepository.findByColaborador(novoColaborador.getColaborador());
+		if (colaborador.isPresent()) {
 			return Optional.empty();
 		} else {
 			
-			return Optional.ofNullable(clienteRepository.save(novoCliente));
+			return Optional.ofNullable(ColaboradorRepository.save(novoColaborador));
 		}
+	}
+	
+	public Optional<ColaboradorModel> buscarPeloCpfPresente(String cpf) {
+
+		Optional<ColaboradorModel> colaboradorSalvo = ColaboradorRepository.findById(cpf);
+
+		if (colaboradorSalvo.isEmpty()) {
+
+			return Optional.empty(); //retorno objeto vazio
+		} 
+
+		return Optional.ofNullable(colaboradorSalvo.get()); 
 	}
   
 	
